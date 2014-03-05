@@ -18,10 +18,5 @@ public enum AllCastProviderType {
      * Provider type that is only audio. This provider will have
      * the media player presentation within AllCast.
      */
-    AUDIO;
-
-    @Override
-    public String toString() {
-        return super.toString().toLowerCase();
-    }
+    AUDIO
 }
