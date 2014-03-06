@@ -7,8 +7,8 @@ import com.koushikdutta.cast.api.AllCastMediaService;
 /**
  * Created by koush on 3/4/14.
  */
-public class TwitService extends AllCastMediaService {
-    public TwitService() {
+public class FeedService extends AllCastMediaService {
+    public FeedService() {
         super(Uri.parse("content://com.koushikdutta.cast.twit"));
     }
 }
