@@ -1,5 +1,6 @@
 package com.koushikdutta.cast.api;
 
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,11 +23,9 @@ import javax.xml.parsers.ParserConfigurationException;
 /**
  * Created by koush on 3/4/14.
  */
-public class AllCastRSSProvider extends AllCastProvider {
-    private String rssUrl;
-    public AllCastRSSProvider(String rssUrl) {
+public abstract class AllCastRSSProvider extends AllCastProvider {
+    public AllCastRSSProvider() {
         super(AllCastProviderType.VIDEO);
-        this.rssUrl = rssUrl;
     }
 
     private static class AllCastRSSItem extends AllCastMediaItem {
@@ -49,10 +48,13 @@ public class AllCastRSSProvider extends AllCastProvider {
         Node rss = findNode(document, "rss");
         Node channel = findNode(rss, "channel");
         ArrayList<AllCastMediaItem> items = new ArrayList<AllCastMediaItem>();
+        Node image = findNode(channel, "image");
+        String imageUrl = getChildText(image, "url");
         for (int i = 0; i < channel.getChildNodes().getLength(); i++) {
             Node item = channel.getChildNodes().item(i);
             if (TextUtils.equals(item.getNodeName(), "item"))
-                items.add(new AllCastRSSItem(item));
+                items.add(new AllCastRSSItem(item)
+                .setThumbnailUrl(imageUrl));
         }
         return items;
     }
@@ -73,10 +75,12 @@ public class AllCastRSSProvider extends AllCastProvider {
         return null;
     }
 
+    protected abstract String getRssUrlFromContentUri(Uri uri);
+
     @Override
-    protected Collection<AllCastMediaItem> getMediaItems() {
+    protected Collection<AllCastMediaItem> getMediaItems(Uri uri) {
         try {
-            URL url = new URL(rssUrl);
+            URL url = new URL(getRssUrlFromContentUri(uri));
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             InputStream inputStream = connection.getInputStream();
             try {

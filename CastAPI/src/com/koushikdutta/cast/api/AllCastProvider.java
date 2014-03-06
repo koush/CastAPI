@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,13 +31,18 @@ public abstract class AllCastProvider extends ContentProvider {
 
     @Override
     public Bundle call(String method, String arg, Bundle extras) {
-        if (AllCastProviderMethod.valueOf(method) == AllCastProviderMethod.GET_PROVIDER_TYPE) {
+        if (AllCastProviderMethod.valueOf(method) == AllCastProviderMethod.GET_PROVIDER_INFO) {
             Bundle ret = new Bundle();
             ret.putString(AllCastProviderMethod.EXTRA_TYPE, type.toString());
+            ret.putBoolean(AllCastProviderMethod.EXTRA_ENABLED, isEnabled());
             return ret;
         }
 
         return super.call(method, arg, extras);
+    }
+
+    protected boolean isEnabled() {
+        return true;
     }
 
     @Override
@@ -46,14 +50,14 @@ public abstract class AllCastProvider extends ContentProvider {
         return true;
     }
 
-    protected abstract Collection<AllCastMediaItem> getMediaItems();
+    protected abstract Collection<AllCastMediaItem> getMediaItems(Uri uri);
 
     @Override
     final public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         if (projection == null)
             projection = DEFAULT_PROJECTION;
         MatrixCursor cursor = new MatrixCursor(projection);
-        for (AllCastMediaItem item: getMediaItems()) {
+        for (AllCastMediaItem item: getMediaItems(uri)) {
             ArrayList<String> projectionValues = new ArrayList<String>();
             for (String column: projection) {
                 projectionValues.add(item.values.get(column));
@@ -65,7 +69,7 @@ public abstract class AllCastProvider extends ContentProvider {
 
     @Override
     final public String getType(Uri uri) {
-        return "vnd.android.cursor.dir/com.koushikdutta.cast." + type.toString();
+        return "vnd.android.cursor.dir/com.koushikdutta.cast";
     }
 
     // provider is read only
