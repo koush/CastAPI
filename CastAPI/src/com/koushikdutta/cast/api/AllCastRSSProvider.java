@@ -24,8 +24,14 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by koush on 3/4/14.
  */
 public abstract class AllCastRSSProvider extends AllCastProvider {
-    public AllCastRSSProvider() {
-        super(AllCastProviderType.VIDEO);
+    @Override
+    protected AllCastProviderLayout getLayout() {
+        return AllCastProviderLayout.LIST;
+    }
+
+    @Override
+    protected AllCastProviderCategory getCategory() {
+        return AllCastProviderCategory.RSS;
     }
 
     private static class AllCastRSSItem extends AllCastMediaItem {

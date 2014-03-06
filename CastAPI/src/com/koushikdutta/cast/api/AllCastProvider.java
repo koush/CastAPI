@@ -22,19 +22,18 @@ public abstract class AllCastProvider extends ContentProvider {
         AllCastMediaItem.COLUMN_DURATION,
     };
 
-    private AllCastProviderType type;
-    public AllCastProvider(AllCastProviderType type) {
-        if (type == null)
-            throw new IllegalArgumentException("must provide an AllCastProviderType");
-        this.type = type;
+    protected abstract AllCastProviderLayout getLayout();
+    protected AllCastProviderCategory getCategory() {
+        return AllCastProviderCategory.OTHER;
     }
 
     @Override
     public Bundle call(String method, String arg, Bundle extras) {
         if (AllCastProviderMethod.valueOf(method) == AllCastProviderMethod.GET_PROVIDER_INFO) {
             Bundle ret = new Bundle();
-            ret.putString(AllCastProviderMethod.EXTRA_TYPE, type.toString());
+            ret.putString(AllCastProviderMethod.EXTRA_TYPE, getLayout().toString());
             ret.putBoolean(AllCastProviderMethod.EXTRA_ENABLED, isEnabled());
+            ret.putString(AllCastProviderMethod.EXTRA_CATEGORY, getCategory().toString());
             return ret;
         }
 

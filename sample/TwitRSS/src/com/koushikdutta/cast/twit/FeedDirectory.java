@@ -4,18 +4,24 @@ import android.net.Uri;
 
 import com.koushikdutta.cast.api.AllCastMediaItem;
 import com.koushikdutta.cast.api.AllCastProvider;
-import com.koushikdutta.cast.api.AllCastProviderType;
+import com.koushikdutta.cast.api.AllCastProviderCategory;
+import com.koushikdutta.cast.api.AllCastProviderLayout;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Hashtable;
 
 /**
  * Created by koush on 3/5/14.
  */
 public class FeedDirectory extends AllCastProvider {
-    public FeedDirectory() {
-        super(AllCastProviderType.GALLERY);
+    @Override
+    protected AllCastProviderLayout getLayout() {
+        return AllCastProviderLayout.GRID;
+    }
+
+    @Override
+    protected AllCastProviderCategory getCategory() {
+        return AllCastProviderCategory.RSS;
     }
 
     final static ArrayList<String> feeds = new ArrayList<String>();
