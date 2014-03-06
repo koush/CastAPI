@@ -10,7 +10,7 @@ import com.koushikdutta.cast.api.AllCastRSSProvider;
 public class FeedProvider extends AllCastRSSProvider {
     @Override
     protected String getRssUrlFromContentUri(Uri uri) {
-        // parse out the twit code
+        // parse out the revision3 code
         String code = uri.getPath().replace("/", "");
         return String.format("http://revision3.com/%s/feed/mp4-large", code);
     }

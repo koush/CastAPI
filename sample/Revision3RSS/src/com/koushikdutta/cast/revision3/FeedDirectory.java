@@ -26,25 +26,14 @@ public class FeedDirectory extends AllCastProvider {
         feeds.add("philipdefranco");
         feeds.add("sourcefednerd");
         feeds.add("rev3gamesoriginals");
-        feeds.add("geekbeattv");
         feeds.add("androidauthority");
-        feeds.add("sourcefednerd");
         feeds.add("hak5");
-        feeds.add("technobuffalo");
         feeds.add("whatsthebigdeal");
-        feeds.add("philipdefranco");
-        feeds.add("sourcefednerd");
-        feeds.add("philipdefranco");
-        feeds.add("sourcefednerd");
         feeds.add("internetrabbithole");
         feeds.add("rev3gamesreviews");
-        feeds.add("technobuffalo");
-        feeds.add("geekbeattv");
         feeds.add("sesslerssomething");
         feeds.add("filmriot");
-        feeds.add("sourcefednerd");
         feeds.add("amplified");
-        feeds.add("sourcefednerd");
 
     }
 
@@ -54,7 +43,7 @@ public class FeedDirectory extends AllCastProvider {
         for (String feed: FeedDirectory.feeds) {
             feeds.add(new AllCastMediaItem()
             .setContentUrl("content://com.koushikdutta.cast.revision3.show/" + feed)
-            .setThumbnailUrl(String.format("http://feeds.twit.tv/coverart/%s300.jpg", feed)));
+            .setThumbnailUrl(String.format("http://videos.revision3.com/revision3/images/shows/%s/%s.jpg", feed, feed)));
         }
         return feeds;
     }
