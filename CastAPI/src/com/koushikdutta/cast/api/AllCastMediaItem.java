@@ -13,6 +13,7 @@ public class AllCastMediaItem {
     public static final String COLUMN_THUMBNAIL_URL = "thumbnail";
     public static final String COLUMN_CONTENT_URL = MediaStore.Video.Media.DATA;
     public static final String COLUMN_DURATION = MediaStore.Video.Media.DURATION;
+    public static final String COLUMN_MIME_TYPE = MediaStore.Video.Media.MIME_TYPE;
 
     // use content values instead?
     Hashtable<String, String> values = new Hashtable<String, String>();
@@ -58,5 +59,12 @@ public class AllCastMediaItem {
     public AllCastMediaItem setDescription(String description) {
         put(COLUMN_DESCRIPTION, description);
         return this;
+    }
+    public AllCastMediaItem setMimeType(String mimeType) {
+        put(COLUMN_MIME_TYPE, mimeType);
+        return this;
+    }
+    public String getMimeType() {
+        return values.get(COLUMN_MIME_TYPE);
     }
 }
