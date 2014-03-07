@@ -43,7 +43,7 @@ public abstract class AllCastRSSProvider extends AllCastProvider {
             setDescription(getChildText("itunes:subtitle"));
             String link = findNode(node, "enclosure").getAttributes().getNamedItem("url").getTextContent();
             setContentUrl(link);
-            setDurationMs(getChildText("itunes:duration"));
+            setDuration(getChildText("itunes:duration"));
         }
 
         String getChildText(String child) {

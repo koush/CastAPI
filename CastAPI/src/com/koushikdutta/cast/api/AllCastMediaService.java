@@ -15,6 +15,10 @@ public class AllCastMediaService extends Service {
         this.providerUri = providerUri;
     }
 
+    public Uri getProviderUri() {
+        return providerUri;
+    }
+
     IAllCastMediaService stub = new IAllCastMediaService.Stub() {
         @Override
         public Uri getProviderUri() throws RemoteException {
