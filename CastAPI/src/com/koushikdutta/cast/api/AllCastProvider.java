@@ -24,6 +24,10 @@ public abstract class AllCastProvider extends ContentProvider {
     };
 
     protected abstract AllCastProviderLayout getLayout();
+    protected AllCastProviderLayout getLayout(Uri uri) {
+        return getLayout();
+    }
+
     protected AllCastProviderCategory getCategory() {
         return AllCastProviderCategory.OTHER;
     }
@@ -32,7 +36,7 @@ public abstract class AllCastProvider extends ContentProvider {
     public Bundle call(String method, String arg, Bundle extras) {
         if (AllCastProviderMethod.valueOf(method) == AllCastProviderMethod.GET_PROVIDER_INFO) {
             Bundle ret = new Bundle();
-            ret.putString(AllCastProviderMethod.EXTRA_TYPE, getLayout().toString());
+            ret.putString(AllCastProviderMethod.EXTRA_TYPE, getLayout((Uri)extras.getParcelable("uri")).toString());
             ret.putBoolean(AllCastProviderMethod.EXTRA_ENABLED, isEnabled());
             ret.putString(AllCastProviderMethod.EXTRA_CATEGORY, getCategory().toString());
             return ret;
