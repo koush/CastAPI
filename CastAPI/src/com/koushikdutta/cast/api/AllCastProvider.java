@@ -64,7 +64,7 @@ public abstract class AllCastProvider extends ContentProvider {
         for (AllCastMediaItem item: getMediaItems(uri)) {
             ArrayList<String> projectionValues = new ArrayList<String>();
             for (String column: projection) {
-                projectionValues.add(item.values.get(column));
+                projectionValues.add(item.values.getAsString(column));
             }
             cursor.addRow(projectionValues);
         }

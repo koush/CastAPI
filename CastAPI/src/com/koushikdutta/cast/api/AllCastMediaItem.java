@@ -1,5 +1,6 @@
 package com.koushikdutta.cast.api;
 
+import android.content.ContentValues;
 import android.provider.MediaStore;
 
 import java.util.Hashtable;
@@ -15,8 +16,7 @@ public class AllCastMediaItem {
     public static final String COLUMN_DURATION = MediaStore.Video.Media.DURATION;
     public static final String COLUMN_MIME_TYPE = MediaStore.Video.Media.MIME_TYPE;
 
-    // use content values instead?
-    Hashtable<String, String> values = new Hashtable<String, String>();
+    ContentValues values = new ContentValues();
 
     private void put(String key, String value) {
         if (value == null)
@@ -26,35 +26,35 @@ public class AllCastMediaItem {
     }
 
     public String getThumbnailUrl() {
-        return values.get(COLUMN_THUMBNAIL_URL);
+        return values.getAsString(COLUMN_THUMBNAIL_URL);
     }
     public AllCastMediaItem setThumbnailUrl(String thumbnailUrl) {
         put(COLUMN_THUMBNAIL_URL, thumbnailUrl);
         return this;
     }
     public String getContentUrl() {
-        return values.get(COLUMN_CONTENT_URL);
+        return values.getAsString(COLUMN_CONTENT_URL);
     }
     public AllCastMediaItem setContentUrl(String contentUrl) {
         put(COLUMN_CONTENT_URL, contentUrl);
         return this;
     }
     public String getTitle() {
-        return values.get(COLUMN_TITLE);
+        return values.getAsString(COLUMN_TITLE);
     }
     public AllCastMediaItem setTitle(String title) {
         put(COLUMN_TITLE, title);
         return this;
     }
     public String getDuration() {
-        return values.get(COLUMN_DURATION);
+        return values.getAsString(COLUMN_DURATION);
     }
     public AllCastMediaItem setDuration(String duration) {
         put(COLUMN_DURATION, duration);
         return this;
     }
     public String getDescription() {
-        return values.get(COLUMN_DESCRIPTION);
+        return values.getAsString(COLUMN_DESCRIPTION);
     }
     public AllCastMediaItem setDescription(String description) {
         put(COLUMN_DESCRIPTION, description);
@@ -65,6 +65,12 @@ public class AllCastMediaItem {
         return this;
     }
     public String getMimeType() {
-        return values.get(COLUMN_MIME_TYPE);
+        return values.getAsString(COLUMN_MIME_TYPE);
+    }
+
+    public static AllCastMediaItem fromContentValues(ContentValues values) {
+        AllCastMediaItem item = new AllCastMediaItem();
+        item.values.putAll(values);
+        return item;
     }
 }
