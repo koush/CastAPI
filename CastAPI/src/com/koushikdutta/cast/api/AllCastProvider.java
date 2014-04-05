@@ -21,6 +21,7 @@ public abstract class AllCastProvider extends ContentProvider {
         AllCastMediaItem.COLUMN_CONTENT_URL,
         AllCastMediaItem.COLUMN_MIME_TYPE,
         AllCastMediaItem.COLUMN_DURATION,
+        AllCastMediaItem.COLUMN_SUBTITLES,
     };
 
     protected abstract AllCastProviderLayout getLayout();

@@ -15,6 +15,7 @@ public class AllCastMediaItem {
     public static final String COLUMN_CONTENT_URL = MediaStore.Video.Media.DATA;
     public static final String COLUMN_DURATION = MediaStore.Video.Media.DURATION;
     public static final String COLUMN_MIME_TYPE = MediaStore.Video.Media.MIME_TYPE;
+    public static final String COLUMN_SUBTITLES = "subtitles";
 
     ContentValues values = new ContentValues();
 
@@ -66,6 +67,13 @@ public class AllCastMediaItem {
     }
     public String getMimeType() {
         return values.getAsString(COLUMN_MIME_TYPE);
+    }
+    public AllCastMediaItem setSubtitles(String subtitles) {
+        put(COLUMN_SUBTITLES, subtitles);
+        return this;
+    }
+    public String getSubtitles() {
+        return values.getAsString(COLUMN_SUBTITLES);
     }
 
     public static AllCastMediaItem fromContentValues(ContentValues values) {
