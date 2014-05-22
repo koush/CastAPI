@@ -17,4 +17,6 @@ public enum AllCastProviderLayout {
      * the media player presentation within AllCast.
      */
     // AUDIO
+
+    UNIFORM_GRID
 }

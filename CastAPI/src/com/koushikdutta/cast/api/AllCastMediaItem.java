@@ -17,6 +17,8 @@ public class AllCastMediaItem {
     public static final String COLUMN_MIME_TYPE = MediaStore.Video.Media.MIME_TYPE;
     public static final String COLUMN_SUBTITLES = "subtitles";
 
+    public static final String DURATION_ALLCAST_LOAD_IMMEDIATE = "laod-immediately";
+
     ContentValues values = new ContentValues();
 
     private void put(String key, String value) {
