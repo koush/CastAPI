@@ -18,5 +18,8 @@ public enum AllCastProviderLayout {
      */
     // AUDIO
 
-    UNIFORM_GRID
+    UNIFORM_GRID,
+
+    LABELLED_GRID,
+    LABELLED_GRID_LANDSCAPE
 }
