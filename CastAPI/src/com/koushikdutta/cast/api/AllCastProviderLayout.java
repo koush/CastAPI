@@ -12,11 +12,6 @@ public enum AllCastProviderLayout {
      * This provider type will have a grid presentation within AllCast.
      */
     GRID,
-    /**
-     * Provider type that is only audio. This provider will have
-     * the media player presentation within AllCast.
-     */
-    // AUDIO
 
     UNIFORM_GRID,
 
