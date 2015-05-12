@@ -26,7 +26,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public abstract class AllCastRSSProvider extends AllCastProvider {
     @Override
     protected AllCastProviderLayout getLayout() {
-        return AllCastProviderLayout.LIST;
+        return AllCastProviderLayout.LABELLED_GRID_LANDSCAPE;
     }
 
     @Override

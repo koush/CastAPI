@@ -5,10 +5,6 @@ package com.koushikdutta.cast.api;
  */
 public enum AllCastProviderLayout {
     /**
-     * This provider will have a list presentation within AllCast.
-     */
-    LIST,
-    /**
      * This provider type will have a grid presentation within AllCast.
      */
     GRID,

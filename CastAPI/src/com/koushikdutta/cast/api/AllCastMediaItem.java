@@ -3,12 +3,12 @@ package com.koushikdutta.cast.api;
 import android.content.ContentValues;
 import android.provider.MediaStore;
 
-import java.util.Hashtable;
-
 /**
  * Created by koush on 3/4/14.
  */
 public class AllCastMediaItem {
+    public static final String MIMETYPE_ALBUM = "x-application/album";
+
     public static final String COLUMN_TITLE = MediaStore.Video.Media.TITLE;
     public static final String COLUMN_DESCRIPTION = MediaStore.Video.Media.DESCRIPTION;
     public static final String COLUMN_THUMBNAIL_URL = "thumbnail";
@@ -16,6 +16,7 @@ public class AllCastMediaItem {
     public static final String COLUMN_DURATION = MediaStore.Video.Media.DURATION;
     public static final String COLUMN_MIME_TYPE = MediaStore.Video.Media.MIME_TYPE;
     public static final String COLUMN_SUBTITLES = "subtitles";
+    public static final String COLUMN_SERIES = "series";
 
     public static final String DURATION_ALLCAST_LOAD_IMMEDIATE = "laod-immediately";
 
@@ -76,6 +77,13 @@ public class AllCastMediaItem {
     }
     public String getSubtitles() {
         return values.getAsString(COLUMN_SUBTITLES);
+    }
+    public AllCastMediaItem setSeries(String series) {
+        put(COLUMN_SERIES, series);
+        return this;
+    }
+    public String getSeries() {
+        return values.getAsString(COLUMN_SERIES);
     }
 
     public static AllCastMediaItem fromContentValues(ContentValues values) {
