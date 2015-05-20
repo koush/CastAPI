@@ -91,4 +91,7 @@ public class AllCastMediaItem {
         item.values.putAll(values);
         return item;
     }
+    public ContentValues toContentValues() {
+        return values;
+    }
 }
