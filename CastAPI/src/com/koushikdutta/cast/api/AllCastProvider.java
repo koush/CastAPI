@@ -34,12 +34,18 @@ public abstract class AllCastProvider extends ContentProvider {
         return AllCastProviderCategory.OTHER;
     }
 
+    protected boolean canDelete(Uri uri) {
+        return false;
+    }
+
     @Override
     public Bundle call(String method, String arg, Bundle extras) {
         if (AllCastProviderMethod.valueOf(method) == AllCastProviderMethod.GET_PROVIDER_INFO) {
             Bundle ret = new Bundle();
-            ret.putString(AllCastProviderMethod.EXTRA_TYPE, getLayout((Uri)extras.getParcelable("uri")).toString());
+            Uri uri = extras.getParcelable("uri");
+            ret.putString(AllCastProviderMethod.EXTRA_TYPE, getLayout(uri).toString());
             ret.putBoolean(AllCastProviderMethod.EXTRA_ENABLED, isEnabled());
+            ret.putBoolean(AllCastProviderMethod.EXTRA_CAN_DELETE, canDelete(uri));
             ret.putString(AllCastProviderMethod.EXTRA_CATEGORY, getCategory().toString());
             return ret;
         }
@@ -86,7 +92,7 @@ public abstract class AllCastProvider extends ContentProvider {
 
     // provider is read only
     @Override
-    final public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
         return 0;
     }
 
