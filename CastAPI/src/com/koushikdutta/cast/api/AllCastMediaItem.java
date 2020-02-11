@@ -12,18 +12,24 @@ public class AllCastMediaItem {
     public static final String COLUMN_TITLE = MediaStore.Video.Media.TITLE;
     public static final String COLUMN_DESCRIPTION = MediaStore.Video.Media.DESCRIPTION;
     public static final String COLUMN_THUMBNAIL_URL = "thumbnail";
+    public static final String COLUMN_BACKDROP_URL = "backdrop";
     public static final String COLUMN_CONTENT_URL = MediaStore.Video.Media.DATA;
     public static final String COLUMN_DURATION = MediaStore.Video.Media.DURATION;
+    public static final String COLUMN_SIZE = MediaStore.Video.Media.SIZE;
     public static final String COLUMN_MIME_TYPE = MediaStore.Video.Media.MIME_TYPE;
     public static final String COLUMN_SUBTITLES = "subtitles";
     public static final String COLUMN_SERIES = "series";
-    public static final String COLUMN_CAN_DELETE = "can_delete";
-
-    public static final String DURATION_ALLCAST_LOAD_IMMEDIATE = "laod-immediately";
 
     ContentValues values = new ContentValues();
 
     private void put(String key, String value) {
+        if (value == null)
+            values.remove(key);
+        else
+            values.put(key, value);
+    }
+
+    private void put(String key, Long value) {
         if (value == null)
             values.remove(key);
         else
@@ -35,6 +41,13 @@ public class AllCastMediaItem {
     }
     public AllCastMediaItem setThumbnailUrl(String thumbnailUrl) {
         put(COLUMN_THUMBNAIL_URL, thumbnailUrl);
+        return this;
+    }
+    public String getBackdropUrl() {
+        return values.getAsString(COLUMN_BACKDROP_URL);
+    }
+    public AllCastMediaItem setBackdropUrl(String backdropUrl) {
+        put(COLUMN_BACKDROP_URL, backdropUrl);
         return this;
     }
     public String getContentUrl() {
@@ -56,6 +69,13 @@ public class AllCastMediaItem {
     }
     public AllCastMediaItem setDuration(String duration) {
         put(COLUMN_DURATION, duration);
+        return this;
+    }
+    public Long getSize() {
+        return values.getAsLong(COLUMN_SIZE);
+    }
+    public AllCastMediaItem setSize(Long size) {
+        put(COLUMN_SIZE, size);
         return this;
     }
     public String getDescription() {

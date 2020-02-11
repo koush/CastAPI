@@ -10,4 +10,7 @@ public enum AllCastProviderMethod {
     public static String EXTRA_TYPE = "type";
     public static String EXTRA_ENABLED = "enabled";
     public static String EXTRA_CAN_DELETE = "can_delete";
+    public static String EXTRA_EDIT_ACTIVITY = "can_edit";
+    public static String EXTRA_ADD_ACTIVITY = "can_add";
+    public static String EXTRA_EMPTY_STRING = "empty_string";
 }

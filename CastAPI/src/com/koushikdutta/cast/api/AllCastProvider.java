@@ -1,5 +1,6 @@
 package com.koushikdutta.cast.api;
 
+import android.content.ComponentName;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -18,9 +19,11 @@ public abstract class AllCastProvider extends ContentProvider {
         AllCastMediaItem.COLUMN_TITLE,
         AllCastMediaItem.COLUMN_DESCRIPTION,
         AllCastMediaItem.COLUMN_THUMBNAIL_URL,
+        AllCastMediaItem.COLUMN_BACKDROP_URL,
         AllCastMediaItem.COLUMN_CONTENT_URL,
         AllCastMediaItem.COLUMN_MIME_TYPE,
         AllCastMediaItem.COLUMN_DURATION,
+        AllCastMediaItem.COLUMN_SIZE,
         AllCastMediaItem.COLUMN_SUBTITLES,
         AllCastMediaItem.COLUMN_SERIES,
     };
@@ -38,6 +41,17 @@ public abstract class AllCastProvider extends ContentProvider {
         return false;
     }
 
+    protected ComponentName getAddActivity(Uri uri) {
+        return null;
+    }
+    protected ComponentName getEditActivity(Uri uri) {
+        return null;
+    }
+
+    protected String getEmptyString(Uri uri) {
+        return null;
+    }
+
     @Override
     public Bundle call(String method, String arg, Bundle extras) {
         if (AllCastProviderMethod.valueOf(method) == AllCastProviderMethod.GET_PROVIDER_INFO) {
@@ -46,6 +60,9 @@ public abstract class AllCastProvider extends ContentProvider {
             ret.putString(AllCastProviderMethod.EXTRA_TYPE, getLayout(uri).toString());
             ret.putBoolean(AllCastProviderMethod.EXTRA_ENABLED, isEnabled());
             ret.putBoolean(AllCastProviderMethod.EXTRA_CAN_DELETE, canDelete(uri));
+            ret.putParcelable(AllCastProviderMethod.EXTRA_EDIT_ACTIVITY, getEditActivity(uri));
+            ret.putParcelable(AllCastProviderMethod.EXTRA_ADD_ACTIVITY, getAddActivity(uri));
+            ret.putString(AllCastProviderMethod.EXTRA_EMPTY_STRING, getEmptyString(uri));
             ret.putString(AllCastProviderMethod.EXTRA_CATEGORY, getCategory().toString());
             return ret;
         }
